@@ -6,9 +6,9 @@
 ![GitHub Release](https://img.shields.io/github/v/release/domaincrafters/ddd_deno_std)
 [![JSR](https://jsr.io/badges/@domaincrafters/std)](https://jsr.io/@domaincrafters/std)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=domaincrafters.std.deno&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=domaincrafters.std.deno)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=domaincrafters.std.deno&metric=coverage)](https://sonarcloud.io/summary/new_code?id=domaincrafters.std.deno)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=domaincrafters.std.deno&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=domaincrafters.std.deno)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=domaincrafters.deno.std&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=domaincrafters.deno.std)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=domaincrafters.deno.std&metric=coverage)](https://sonarcloud.io/summary/new_code?id=domaincrafters.deno.std)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=domaincrafters.deno.std&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=domaincrafters.deno.std)
 
 
 Domaincrafters/std is a package designed to simplify the development of **educational** Domain-Driven Design (DDD) projects in Deno using TypeScript. It provides essential object constructs that, while not directly tied to DDD, offer robust utilities to streamline your development process. 🛠️
