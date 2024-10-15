@@ -1,0 +1,14 @@
+.vscode
+dist
+build
+.env
+*.lcov
+cov_profile
+.scannerwork
+coverage
+node_modules
+package-lock.json
+yarn.lock
+yarn-error.log
+npm-debug.log
+npm-debug.log.*

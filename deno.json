@@ -1,0 +1,56 @@
+{
+  "name": "@domaincrafters/std",
+  "version": "0.0.0",
+  "compilerOptions": {
+      "strict": true,
+      "noErrorTruncation": true,
+      "noFallthroughCasesInSwitch": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noUncheckedIndexedAccess": true
+  },
+  "lint": {
+      "include": ["src/"],
+      "rules": {
+        "tags": ["deno-lint", "recommended"],
+        "include": ["missing-constraint", "missing-explicit-type"]
+      }
+  },
+  "fmt": {
+      "useTabs": false,
+      "lineWidth": 100,
+      "indentWidth": 4,
+      "semiColons": true,
+      "singleQuote": true,
+      "proseWrap": "preserve",
+      "include": ["src/"]
+  },
+  "lock": false,
+  "nodeModulesDir": "auto",
+  "test": {
+      "include": ["tests/"]
+  },
+  "imports": {
+    "@domaincrafters/std/": "./src/",
+    "@domaincrafters/std/tests/": "./tests/",
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/uuid": "jsr:@std/uuid@1",
+    "@sonarqube/sonarqube": "npm:sonarqube-scanner@3",
+    "@semantic-release/changelog": "npm:@semantic-release/changelog@6",
+    "@semantic-release/exec": "npm:@semantic-release/exec@6",
+    "@semantic-release/git": "npm:@semantic-release/git@10",
+    "@semantic-release/github": "npm:@semantic-release/github@11",
+    "@semantic-release": "npm:semantic-release@24"
+  },
+
+  "exports": {
+    ".": "./src/mod.ts",
+    "./asserts": "./src/testing/asserts.ts"
+  },
+
+  "tasks": {
+    "test": "rm -rf coverage/;deno fmt; deno test --coverage; deno coverage --exclude=tests;deno coverage --exclude=tests --html; deno check src/; deno lint src/ --compact",
+    "sonar": "rm coverage.lcov; rm -rf cov_profile;deno fmt; deno test --env --allow-env --allow-net --allow-read --coverage=cov_profile && deno coverage cov_profile --lcov > coverage.lcov && deno run --allow-env --allow-write --allow-sys --allow-run --env --allow-read --allow-net scripts/sonar.ts"
+  }
+}

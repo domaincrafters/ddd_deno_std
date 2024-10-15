@@ -1,0 +1,115 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  qa:
+    name: QA
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install dependencies
+        run: deno install
+
+      - name: Deno check
+        run: deno check src/
+
+      - name: Deno lint
+        run: deno lint src
+
+      - name: Run unit tests
+        run: deno test --allow-all
+      
+      - name: Deno jsr check
+        run: deno publish --dry-run
+
+      - name: Build sonar report
+        env:
+          SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+        run: deno task sonar
+
+  build-release:
+    name: release
+    runs-on: ubuntu-latest
+    needs: qa
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      
+      - name: Install dependencies
+        run: deno install
+
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
+        run: npx semantic-release
+
+      - name: Update Deno.json version to latest release
+        id: update_jsr_version
+        run: deno run --allow-read --allow-write --allow-env --allow-net scripts/update_version_in_deno_file.ts
+
+      - name: Format code
+        run: deno fmt
+
+      - name: Commit updated Deno.json JSR version
+        run: |
+          new_version=${{ steps.update_jsr_version.outputs.new_version }}
+          old_version=${{ steps.update_jsr_version.outputs.old_version }}
+
+          if [ "$new_version" == "$old_version" ]; then
+            echo "No new version to commit\n old version: $old_version\n new version: $new_version"
+            exit 0
+          fi
+          echo "Updating JSR package version to latest release $new_version"
+
+          git config user.email "release-bot@domaincrafters.com"
+          git config user.name "Domain Crafters Release Bot"
+          git commit -am "chore: updating JSR package version to latest release $version"
+          git push
+  
+  publish-release:
+    needs: build-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      
+      - name: Pull latest version number and format code
+        run: |
+          git pull
+          deno fmt
+
+      - name: Publish to JSR
+        run: deno publish
