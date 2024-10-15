@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2024 Matthias Blomme and Dimitri Casier
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 export { Optional } from '@domaincrafters/std/Optional.ts';
 export { Guard } from '@domaincrafters/std/Guard.ts';
 export {

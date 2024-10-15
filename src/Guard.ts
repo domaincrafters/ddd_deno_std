@@ -4,6 +4,7 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
+
 import { type Exception, IllegalArgumentException } from '@domaincrafters/std/mod.ts';
 
 /**
