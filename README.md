@@ -41,40 +41,11 @@ import {
   IllegalStateException,
   NotFoundException,
   IllegalArgumentException,
+  Optional
 } from "jsr:@domaincrafters/std";
 ```
 
 ## Usage 🛠️
-
-### UUID 🔑
-
-Generate, parse, and compare UUIDs effortlessly.
-
-```typescript
-import { UUID, IllegalArgumentException } from "jsr:@domaincrafters/std";
-
-// Creating a new UUID
-const newUuid = UUID.create();
-console.log(newUuid.toString()); // Outputs a UUID, e.g., '123e4567-e89b-12d3-a456-426614174000'
-
-// Parsing an existing UUID string
-try {
-  const parsedUuid = UUID.parse("123e4567-e89b-12d3-a456-426614174000");
-  console.log(parsedUuid.value); // Outputs: '123e4567-e89b-12d3-a456-426614174000'
-} catch (error) {
-  if (error instanceof IllegalArgumentException) {
-    console.error(error.message); // Outputs: 'Invalid UUID'
-  }
-}
-
-// Comparing UUIDs
-const uuid1 = UUID.create();
-const uuid2 = UUID.parse(uuid1.toString());
-console.log(uuid1.equals(uuid2)); // Outputs: true
-
-const uuid3 = UUID.create();
-console.log(uuid1.equals(uuid3)); // Outputs: false
-```
 
 ### Guard 🛡️
 
@@ -184,6 +155,23 @@ try {
     console.error(error.message);
   }
 }
+```
+
+### Optional 🔄
+
+Handle optional values with ease using the `Optional` class.
+
+```typescript
+import { Optional } from "jsr:@domaincrafters/std";
+
+const value = Optional.ofNullable("Hello, world!");
+console.log(value.isPresent()); // Outputs: true
+console.log(value.get()); // Outputs: 'Hello, world!'
+
+const emptyValue = Optional.ofNullable(null);
+console.log(emptyValue.isPresent()); // Outputs: false
+console.log(emptyValue.get()); // Throws an exception
+
 ```
 
 ## Contributing 🤝

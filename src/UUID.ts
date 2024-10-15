@@ -4,8 +4,6 @@
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
  */
-import { v4 } from '@std/uuid';
-import { IllegalArgumentException } from '@domaincrafters/std/mod.ts';
 
 /**
  * Represents a universally unique identifier (UUID).
@@ -13,13 +11,33 @@ import { IllegalArgumentException } from '@domaincrafters/std/mod.ts';
  * This class provides methods to create, parse, and compare UUIDs.
  * It ensures that all UUIDs conform to the standard UUID format.
  *
- * @example
- * const uuid = UUID.create();
- * console.log(uuid.toString());
+ * @example Usage
+ * ```ts
+ * import { UUID } from './UUID.ts';
  *
- * @example
+ * // Creating a new UUID
+ * const newUuid = UUID.create();
+ * console.log(newUuid.toString()); // e.g., '3d6f0a3b-7b9c-4d2a-9f3c-1e2d3c4b5a6f'
+ *
+ * // Parsing an existing UUID string
  * const parsedUuid = UUID.parse('550e8400-e29b-41d4-a716-446655440000');
+ * console.log(parsedUuid.value); // '550e8400-e29b-41d4-a716-446655440000'
+ *
+ * // Using the EMPTY UUID
+ * console.log(UUID.EMPTY.toString()); // '00000000-0000-0000-0000-000000000000'
+ *
+ * // Comparing two UUIDs
+ * const uuid1 = UUID.create();
+ * const uuid2 = UUID.parse(uuid1.toString());
+ * console.log(uuid1.equals(uuid2)); // true
+ *
+ * // Comparing a UUID with a string
+ * const uuid = UUID.create();
+ * console.log(uuid.equals(uuid.toString())); // true
  */
+import { v4 } from '@std/uuid';
+import { IllegalArgumentException } from '@domaincrafters/std/mod.ts';
+
 export class UUID {
     /**
      * A constant representing an empty UUID.
