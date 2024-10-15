@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/domaincrafters/ddd_deno_std/compare/v1.0.1...v1.0.2) (2024-10-15)
+
+
+### Bug Fixes
+
+* **docs:** documentation moved to the classes to better support jsr docs ([3682e79](https://github.com/domaincrafters/ddd_deno_std/commit/3682e7978bb54c62721081c7fd6fc686ac5c7579))
+
 ## [1.0.1](https://github.com/domaincrafters/ddd_deno_std/compare/v1.0.0...v1.0.1) (2024-10-15)
 
 
