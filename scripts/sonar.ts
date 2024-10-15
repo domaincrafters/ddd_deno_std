@@ -5,7 +5,7 @@ scanner(
     options: {
       "sonar.token": Deno.env.get("SONARQUBE_TOKEN"),
       "sonar.host.url": "https://sonarcloud.io/",
-     // "sonar.projectKey": "domaincrafters.deno.std",
+      "sonar.projectKey": "ddd_deno_std",
       "sonar.projectName": "domaincrafters.deno.std",
       "sonar.organization": "domaincrafters",
       "sonar.newCodePeriod": "previous_version",
