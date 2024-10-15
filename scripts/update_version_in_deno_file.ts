@@ -55,7 +55,10 @@ async function main() {
         await updateGithubOutput("new_version", new_version);
         await updateGithubOutput("old_version", old_version);
     } catch (error) {
-        console.error(`Error: ${error.message}`);
+        if (error instanceof Error) {
+            console.error(`Error: ${error.message}`);
+        }
+        console.error('Failed to update version in deno.json');
     }
 }
 
