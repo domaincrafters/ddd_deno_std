@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/domaincrafters/ddd_deno_std/compare/v1.0.0...v1.0.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* **sonar:** wrong sonar readme badges url ([8d4ccd3](https://github.com/domaincrafters/ddd_deno_std/commit/8d4ccd335b7d923fa29bbaf54b35dd2061d22946))
+
 # 1.0.0 (2024-10-15)
 
 
