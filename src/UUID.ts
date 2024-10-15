@@ -34,6 +34,7 @@
  * // Comparing a UUID with a string
  * const uuid = UUID.create();
  * console.log(uuid.equals(uuid.toString())); // true
+ * ```
  */
 import { v4 } from '@std/uuid';
 import { IllegalArgumentException } from '@domaincrafters/std/mod.ts';
