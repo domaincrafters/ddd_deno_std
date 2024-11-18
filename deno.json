@@ -1,6 +1,6 @@
 {
   "name": "@domaincrafters/std",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "compilerOptions": {
       "strict": true,
       "noErrorTruncation": true,
