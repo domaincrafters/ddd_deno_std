@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/domaincrafters/ddd_deno_std/compare/v1.0.2...v1.1.0) (2024-11-18)
+
+
+### Features
+
+* add getOrThrow method ([f4c08b2](https://github.com/domaincrafters/ddd_deno_std/commit/f4c08b2b87a97e97bf4e04cb0b2be8746b3fe49d))
+
 ## [1.0.2](https://github.com/domaincrafters/ddd_deno_std/compare/v1.0.1...v1.0.2) (2024-10-15)
 
 
