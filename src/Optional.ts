@@ -5,6 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
+import { NotFoundException } from '@domaincrafters/std/mod.ts';
+
 /**
  * A container object which may or may not contain a non-null value.
  * If a value is present, `isPresent` will return `true` and `value` will return the value.
@@ -64,6 +66,13 @@
  * console.log(optionalWithValue.equals(anotherOptional)); // true
  * ```
  */
+
+/**
+ * @constant NOT_FOUND_ERROR_MESSAGE - The default message for the NotFoundException thrown when no value is present.
+ */
+
+const NOT_FOUND_ERROR_MESSAGE = 'Value not found.';
+
 export class Optional<T> {
     private readonly _value?: T;
 
@@ -135,17 +144,14 @@ export class Optional<T> {
      * If a value is present, returns the value, otherwise throws an Error.
      *
      * @returns {T} The non-null value held by this Optional.
-     * @throws {Error} If there is no value present.
+     * @throws {NotFoundException} If there is no value present.
      *
      * @example
      * const optional = Optional.of('Test');
      * console.log(optional.value); // 'Test'
      */
     public get value(): T {
-        if (this._value === undefined) {
-            throw new Error('Value is not present');
-        }
-        return this._value;
+        return this.getOrThrow();
     }
 
     /**
@@ -174,6 +180,26 @@ export class Optional<T> {
      */
     public getOrElse(defaultValue: T): T {
         return this._value ?? defaultValue;
+    }
+
+    /**
+     * Returns the value if present, otherwise throws a NotFoundException with the provided message.
+     *
+     * @param notFoundErrorMessage
+     * @returns {T} The value, if present.
+     * @throws {NotFoundException} If there is no value present.
+     *
+     * @example
+     * const optional = Optional.empty<string>();
+     * const value = optional.getOrThrow('Could not find this value.');
+     * console.log(value); // Error: Could not find this value.
+     */
+    public getOrThrow(notFoundErrorMessage: string = NOT_FOUND_ERROR_MESSAGE): T {
+        if (this._value === undefined) {
+            throw new NotFoundException(notFoundErrorMessage);
+        }
+
+        return this._value;
     }
 
     /**

@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertThrows } from "@std/assert";
-import { Optional } from '@domaincrafters/std/mod.ts';
+import { NotFoundException, Optional } from '@domaincrafters/std/mod.ts';
 
 Deno.test("Optional.of() should create an Optional containing the given value", () => {
   // Arrange
@@ -95,7 +95,7 @@ Deno.test("Optional.value should throw an Error when Optional is empty", () => {
       console.log(value);
     },
     Error,
-    "Value is not present",
+    "Value not found.",
   );
 });
 
@@ -440,4 +440,31 @@ Deno.test("Optional.equals() should handle object references", () => {
   // Assert
   assertEquals(result1, true);
   assertEquals(result2, false);
+});
+
+Deno.test("Optional.getOrThrow() should return the value when Optional is present", () => {
+  // Arrange
+  const value = 42;
+  const optional = Optional.of(value);
+
+  // Act
+  const result = optional.getOrThrow("Value not found");
+
+  // Assert
+  assertEquals(result, value);
+});
+
+Deno.test("Optional.getOrThrow() should throw NotFoundException with provided message when Optional is empty", () => {
+  // Arrange
+  const optional = Optional.empty<number>();
+  const errorMessage = "Could not find this value.";
+
+  // Act & Assert
+  assertThrows(
+    () => {
+      optional.getOrThrow(errorMessage);
+    },
+    NotFoundException,
+    errorMessage,
+  );
 });
